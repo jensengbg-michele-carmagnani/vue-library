@@ -1,21 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
-      
-    </div>
-    <router-view :books="books" />
+    <div id="nav"></div>
+    <router-view />
   </div>
 </template>
 <script>
-import books from "@/assets/childrenbooks.json";
 export default {
   name: "App",
-
-  computed: {
-    books() {
-      return books.books;
-    },
-  },
 };
 </script>
 

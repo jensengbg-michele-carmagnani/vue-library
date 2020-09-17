@@ -1,29 +1,32 @@
 <template>
   <section class="infoBook">
     <main class="wraper">
-      <article :style="{background: infoBook.color}" class="top">
+      <article :style="{ background: book.color }" class="top">
         <h2>Title</h2>
-        <h3>{{infoBook.title}}</h3>
+        <h3>{{ book.title }}</h3>
         <h2>Author</h2>
-        <h3>{{infoBook.author}}</h3>
+        <h3>{{ book.author }}</h3>
       </article>
       <aside class="generlInfo">
         <h3>Plote</h3>
-        <p>{{infoBook.plot}}</p>
+        <p>{{ book.plot }}</p>
+
         <section class="specificInfo">
           <article>
-
-        <h6>Pages</h6>
-        <p><b>{{infoBook.pages}}</b></p>
+            <h6>Pages</h6>
+            <p>
+              <b>{{ book.pages }}</b>
+            </p>
           </article>
           <article>
-
-        <h6>Audience</h6>
-        <p><b>{{infoBook.audience}}</b></p>
+            <h6>Audience</h6>
+            <p>
+              <b>{{ book.audience }}</b>
+            </p>
           </article>
         </section>
         <p>Back</p>
-    <router-link to="/">&#8617;</router-link>
+        <router-link to="/">&#8617;</router-link>
       </aside>
     </main>
   </section>
@@ -32,19 +35,15 @@
 <script>
 export default {
   name: "BookInfo",
-  props: {
-    books: Array,
-  },
+
   computed: {
-    infoBook() {
-      console.log("books array", this.books);
-      return this.books.filter((book) => book.id == this.$route.params.id)[0];
-      
+    book() {
+      return this.$store.getters.books(this.$route.params.id);
+      //return this.books.filter((book) => book.id == this.$route.params.id)[0];
     },
   },
 };
 </script>
-
 
 <style lang="scss">
 .infoBook {
@@ -56,7 +55,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 3rem;
-    
+
     .top {
       display: flex;
       align-items: center;
@@ -74,14 +73,12 @@ export default {
       background: rgb(223, 222, 222);
       text-align: center;
       border-radius: 1.4rem;
-      .specificInfo{
+      .specificInfo {
         width: 100%;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        
-        
-
+        color: rgb(182, 69, 69);
       }
     }
     article > h2 {
